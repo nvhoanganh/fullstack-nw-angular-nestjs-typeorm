@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from '../environments/environment';
+import { API_BASE_URL } from './generated.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -12,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule.forRoot([], { initialNavigation: 'enabled' }),
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: API_BASE_URL, useValue: environment.api_url }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

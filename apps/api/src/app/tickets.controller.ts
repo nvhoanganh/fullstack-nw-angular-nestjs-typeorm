@@ -1,34 +1,30 @@
 import { Controller, Get, Body, Post } from '@nestjs/common';
 
-import { HealthCheckService } from './app.service';
+import { HealthCheckService } from './healthcheck.service';
 import { TicketService } from './ticket.service';
-import { Ticket, CreateTicketDto, TicketDto } from '@fullstack/data';
+import { CreateTicketDto, TicketDto } from '@fullstack/data';
 import { ApiResponse } from '@nestjs/swagger';
 
-@Controller()
+@Controller('tickets')
 export class TicketsController {
   constructor(
     private readonly appService: HealthCheckService,
     private ticketSrv: TicketService
   ) {}
 
-  @Get('healthz')
-  getData() {
-    return this.appService.getData();
-  }
   @ApiResponse({ status: 200, type: TicketDto, isArray: true })
-  @Get('tickets')
-  getTickets() {
+  @Get()
+  getAll() {
     return this.ticketSrv.getTickets();
   }
 
-  @Post('tickets')
+  @Post()
   @ApiResponse({
     status: 201,
     type: CreateTicketDto,
     description: 'The record has been successfully created.'
   })
-  createTicket(@Body() ticketDto: CreateTicketDto) {
+  post(@Body() ticketDto: CreateTicketDto) {
     return ticketDto;
   }
 }

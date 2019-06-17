@@ -1,8 +1,7 @@
 import { Test } from '@nestjs/testing';
+import { HealthCheckService } from './healthcheck.service';
 
-import { HealthCheckService } from './app.service';
-
-describe('AppService', () => {
+describe('HealthCheckService', () => {
   let service: HealthCheckService;
 
   beforeAll(async () => {
@@ -14,8 +13,8 @@ describe('AppService', () => {
   });
 
   describe('getData', () => {
-    it('should return "Welcome to api!"', () => {
-      expect(service.getData()).toEqual({message: 'Welcome to api!'});
+    it('should return OK', () => {
+      expect(service.getData()).toEqual({statu: 'OK'});
     });
   });
 });

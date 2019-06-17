@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
-import { Ticket } from '@fullstack/data';
+import { TicketDto, TicketType, TicketType3 } from '@fullstack/data';
+import { GeneratedApiClient } from './generated.service';
 
 @Component({
   selector: 'fullstack-root',
@@ -11,9 +10,9 @@ import { Ticket } from '@fullstack/data';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  tickets$: Observable<Ticket[]>;
+  tickets$: Observable<TicketDto[]>;
 
-  constructor(http: HttpClient) {
-    this.tickets$ = http.get<Ticket[]>(environment.api_url + '/api/tickets');
+  constructor(private apisrv : GeneratedApiClient) {
+    this.tickets$ = this.apisrv.ticketsAll();
   }
 }
