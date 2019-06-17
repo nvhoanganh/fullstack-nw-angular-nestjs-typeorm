@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 interface Ticket {
   id: number;
@@ -17,6 +18,6 @@ export class AppComponent {
   tickets$: Observable<Ticket[]>;
 
   constructor(http: HttpClient) {
-    this.tickets$ = http.get<Ticket[]>('/api/tickets');
+    this.tickets$ = http.get<Ticket[]>(environment.api_url + '/api/tickets');
   }
 }
