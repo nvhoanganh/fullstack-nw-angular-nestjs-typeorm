@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { AppController } from './app.controller';
+import { TicketsController } from './app.controller';
 import { HealthCheckService } from './app.service';
 
 describe('AppController', () => {
@@ -8,14 +8,14 @@ describe('AppController', () => {
 
   beforeAll(async () => {
     app = await Test.createTestingModule({
-      controllers: [AppController],
+      controllers: [TicketsController],
       providers: [HealthCheckService],
     }).compile();
   });
 
   describe('getData', () => {
     it('should return "Welcome to api!"', () => {
-      const appController = app.get<AppController>(AppController);
+      const appController = app.get<TicketsController>(TicketsController);
       expect(appController.getData()).toEqual({message: 'Welcome to api!'});
     });
   });
