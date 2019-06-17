@@ -1,9 +1,5 @@
 import { Injectable } from '@nestjs/common';
-
-export interface Ticket {
-  id: number;
-  title: string;
-}
+import { Ticket } from '@fullstack/data';
 
 @Injectable()
 export class TicketService {

@@ -3,11 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
-
-interface Ticket {
-  id: number;
-  title: string;
-}
+import { Ticket } from '@fullstack/data';
 
 @Component({
   selector: 'fullstack-root',
