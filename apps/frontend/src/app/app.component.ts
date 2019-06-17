@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { Observable } from 'rxjs';
+
+interface Ticket {
+  id: number;
+  title: string;
+}
 
 @Component({
   selector: 'fullstack-root',
@@ -6,5 +14,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  tickets$: Observable<Ticket[]>;
+
+  constructor(http: HttpClient) {
+    this.tickets$ = http.get<Ticket[]>('/api/tickets');
+  }
 }

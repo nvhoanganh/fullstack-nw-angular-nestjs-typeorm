@@ -12,7 +12,14 @@
       "tags": []
     },
     "frontend": {
-      "tags": ["frontend"]
+      "tags": [
+        "frontend"
+      ]
+    },
+    "api": {
+      "tags": [
+        "api"
+      ]
     }
   }
 }
