@@ -4,6 +4,7 @@ export enum TicketType {
   Platnium = 'Platnium'
 }
 
+export const TicketTypeValues = ['Silver', 'Gold', 'Platnium']
 export enum TicketType3 {
   Silver = 'Silver',
   Gold = 'Gold',

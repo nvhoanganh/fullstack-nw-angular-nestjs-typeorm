@@ -1,11 +1,10 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { Ticket, TicketType, HealthCheck } from './interfaces';
-
+import { Ticket, TicketType, HealthCheck, TicketTypeValues } from './interfaces';
 export class CreateTicketDto {
   @ApiModelProperty()
   readonly title: string;
 
-  // @ApiModelProperty({ enum: ['Silver', 'Gold', 'Platnium'] })
+  @ApiModelProperty({ enum: TicketTypeValues })
   readonly type: TicketType;
 }
 
@@ -15,7 +14,7 @@ export class TicketDto implements Ticket {
 
   @ApiModelProperty()
   readonly title: string;
-  @ApiModelProperty({ enum: ['Silver', 'Gold', 'Platnium'] })
+  @ApiModelProperty({ enum: TicketTypeValues })
   readonly type: TicketType;
 }
 
