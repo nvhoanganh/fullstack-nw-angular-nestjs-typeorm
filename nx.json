@@ -19,6 +19,9 @@
     },
     "data": {
       "tags": ["shared"]
+    },
+    "api-client": {
+      "tags": []
     }
   }
 }

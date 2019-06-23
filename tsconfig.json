@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@fullstack/data": ["libs/data/src/index.ts"]
+      "@fullstack/data": ["libs/data/src/index.ts"],
+      "@fullstack/api-client": ["libs/api-client/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

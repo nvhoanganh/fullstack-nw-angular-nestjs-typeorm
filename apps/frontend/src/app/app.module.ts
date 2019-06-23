@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { API_BASE_URL } from './generated.service';
+import { API_BASE_URL } from '@fullstack/api-client';
 
 @NgModule({
   declarations: [AppComponent],

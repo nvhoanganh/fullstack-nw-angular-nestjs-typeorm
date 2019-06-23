@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { TicketDto } from '@fullstack/data';
-import { GeneratedApiClient } from './generated.service';
+import { GeneratedApiClient } from '@fullstack/api-client';
 
 @Component({
   selector: 'fullstack-root',

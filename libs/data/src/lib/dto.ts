@@ -13,6 +13,7 @@ export class TicketDto implements Ticket {
   readonly id: number;
 
   @ApiModelProperty()
+
   readonly title: string;
   @ApiModelProperty({ enum: TicketTypeValues })
   readonly type: TicketType;
