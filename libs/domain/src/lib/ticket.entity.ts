@@ -13,4 +13,7 @@ export class Ticket {
 
   @Column()
   title: string;
+
+  @Column('enum', { enum: TicketType })
+  type: number;
 }
