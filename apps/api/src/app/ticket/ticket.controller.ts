@@ -1,5 +1,4 @@
 import { Controller, Get, Body, Post } from '@nestjs/common';
-import { HealthCheckService } from '../healthz/healthcheck.service';
 import { CreateTicketDto, TicketDto } from '@fullstack/data';
 import { ApiResponse } from '@nestjs/swagger';
 import { TicketService } from './ticket.service';
