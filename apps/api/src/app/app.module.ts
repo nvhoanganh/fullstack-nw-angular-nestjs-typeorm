@@ -7,9 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { TicketModule } from './ticket/ticket.module';
 import { HealthCheckModule } from './healthz/healthz.module';
-import { join } from 'path';
 import { getMetadataArgsStorage } from 'typeorm';
-import { Ticket } from './ticket/ticket.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
