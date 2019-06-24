@@ -1,5 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { Ticket, TicketType, HealthCheck, TicketTypeValues } from './interfaces';
+import { HealthCheck, TicketTypeValues } from './interfaces';
+import { TicketType, Ticket } from '@fullstack/domain';
 export class CreateTicketDto {
   @ApiModelProperty()
   readonly title: string;

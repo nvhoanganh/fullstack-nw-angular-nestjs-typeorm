@@ -5,9 +5,7 @@ import { TicketService } from './ticket.service';
 
 @Controller('tickets')
 export class TicketController {
-  constructor(
-    private ticketSrv: TicketService
-  ) {}
+  constructor(private ticketSrv: TicketService) {}
 
   @ApiResponse({ status: 200, type: TicketDto, isArray: true })
   @Get()
@@ -21,7 +19,10 @@ export class TicketController {
     type: CreateTicketDto,
     description: 'The record has been successfully created.'
   })
-  post(@Body() ticketDto: CreateTicketDto) {
-    return ticketDto;
+  async post(@Body() ticketDto: CreateTicketDto) {
+    return await this.ticketSrv.save({
+      ...ticketDto,
+      id: 0
+    });
   }
 }

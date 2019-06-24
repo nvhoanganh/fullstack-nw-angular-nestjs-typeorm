@@ -1,15 +1,5 @@
-export const TicketTypeValues = ['Silver', 'Gold', 'Platnium']
-export enum TicketType {
-  Silver = 'Silver',
-  Gold = 'Gold',
-  Platnium = 'Platnium'
-}
+export const TicketTypeValues = [0, 1, 2]
 
-export interface Ticket {
-  id?: number;
-  title: string;
-  type: TicketType;
-}
 export interface HealthCheck {
   status: string;
 }
