@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 
 // orm
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-//jwt
-import { JwtModule } from '@nestjs/jwt';
 import { TicketModule } from './ticket/ticket.module';
 import { HealthCheckModule } from './healthz/healthz.module';
 import { getMetadataArgsStorage } from 'typeorm';
+
+//jwt
+import { JwtModule } from '@nestjs/jwt';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({

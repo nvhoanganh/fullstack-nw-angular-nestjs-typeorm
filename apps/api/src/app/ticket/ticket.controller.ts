@@ -1,7 +1,6 @@
 import { Controller, Get, Body, Post } from '@nestjs/common';
-import { CreateTicketDto, TicketDto } from '@fullstack/data';
+import { CreateTicketDto, TicketDto, TicketService } from '@fullstack/data';
 import { ApiResponse } from '@nestjs/swagger';
-import { TicketService } from './ticket.service';
 
 @Controller('tickets')
 export class TicketController {
