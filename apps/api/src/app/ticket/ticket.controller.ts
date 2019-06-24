@@ -1,21 +1,19 @@
 import { Controller, Get, Body, Post } from '@nestjs/common';
-
-import { HealthCheckService } from './healthcheck.service';
-import { TicketService } from './ticket.service';
+import { HealthCheckService } from '../healthz/healthcheck.service';
 import { CreateTicketDto, TicketDto } from '@fullstack/data';
 import { ApiResponse } from '@nestjs/swagger';
+import { TicketService } from './ticket.service';
 
 @Controller('tickets')
-export class TicketsController {
+export class TicketController {
   constructor(
-    private readonly appService: HealthCheckService,
     private ticketSrv: TicketService
   ) {}
 
   @ApiResponse({ status: 200, type: TicketDto, isArray: true })
   @Get()
   getAll() {
-    return this.ticketSrv.getTickets();
+    return this.ticketSrv.findAll();
   }
 
   @Post()

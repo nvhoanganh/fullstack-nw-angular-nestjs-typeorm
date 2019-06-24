@@ -38,13 +38,17 @@
     "@angular/router": "^8.0.0",
     "@nestjs/common": "^6.2.4",
     "@nestjs/core": "^6.2.4",
+    "@nestjs/jwt": "^6.1.1",
     "@nestjs/platform-express": "^6.2.4",
     "@nestjs/swagger": "^3.0.2",
+    "@nestjs/typeorm": "^6.1.2",
     "@nrwl/angular": "^8.1.0",
     "core-js": "^2.5.4",
+    "mysql": "^2.17.1",
     "reflect-metadata": "^0.1.12",
     "rxjs": "~6.4.0",
     "swagger-ui-express": "^4.0.6",
+    "typeorm": "^0.2.18",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {

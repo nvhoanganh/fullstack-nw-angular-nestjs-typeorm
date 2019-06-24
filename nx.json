@@ -22,6 +22,9 @@
     },
     "api-client": {
       "tags": []
+    },
+    "domain": {
+      "tags": []
     }
   }
 }

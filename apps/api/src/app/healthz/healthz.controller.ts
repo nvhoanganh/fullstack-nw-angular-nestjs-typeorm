@@ -4,7 +4,7 @@ import { ApiResponse } from '@nestjs/swagger';
 import { HealthCheckDto } from '@fullstack/data';
 
 @Controller('healthz')
-export class HealthController {
+export class HealthCheckController {
   constructor(private readonly appService: HealthCheckService) {}
 
   @Get()

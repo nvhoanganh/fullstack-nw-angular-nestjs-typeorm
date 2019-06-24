@@ -1,13 +1,34 @@
 import { Module } from '@nestjs/common';
 
-import { TicketsController } from './tickets.controller';
-import { HealthCheckService } from './healthcheck.service';
-import { TicketService } from './ticket.service';
-import { HealthController } from './healthz.controller';
+// orm
+import { TypeOrmModule } from '@nestjs/typeorm';
 
+//jwt
+import { JwtModule } from '@nestjs/jwt';
+import { TicketModule } from './ticket/ticket.module';
+import { HealthCheckModule } from './healthz/healthz.module';
+import { join } from 'path';
+import { getMetadataArgsStorage } from 'typeorm';
+import { Ticket } from './ticket/ticket.entity';
 @Module({
-  imports: [],
-  controllers: [TicketsController, HealthController],
-  providers: [HealthCheckService, TicketService],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'fullstack',
+      password: 'fullstack',
+      database: 'fullstack',
+      entities: getMetadataArgsStorage().tables.map(tbl => tbl.target),
+      synchronize: true
+    }),
+    TicketModule,
+    HealthCheckModule,
+    JwtModule.register({
+      secretOrPrivateKey: 'key12345'
+    })
+  ],
+  controllers: [],
+  providers: []
 })
 export class AppModule {}
