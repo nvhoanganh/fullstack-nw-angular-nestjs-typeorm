@@ -1,8 +1,7 @@
 import { JwtService } from '@nestjs/jwt';
-import { Injectable } from '@nestjs/common';
-import { JwtPayload, LoginRequestDto } from '@fullstack/data';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtPayload, LoginRequestDto, UserService } from '@fullstack/data';
 import { User } from '@fullstack/domain';
-import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +19,7 @@ export class AuthService {
       };
       return this.jwtService.sign(user);
     } else {
-      return new Promise(resolve => resolve(null));
+      throw new UnauthorizedException();
     }
   }
 

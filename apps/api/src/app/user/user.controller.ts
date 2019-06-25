@@ -1,8 +1,7 @@
 import { Controller, Get, Body, Post, UseGuards } from '@nestjs/common';
-import { UserDto } from '@fullstack/data';
+import { UserDto, UserService } from '@fullstack/data';
 import { ApiResponse } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-import { UserService } from './user.service';
 
 @Controller('users')
 export class UserController {

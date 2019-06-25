@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '@fullstack/domain';
 import { UserController } from './user.controller';
 import { PassportModule } from '@nestjs/passport';
-import { UserService } from './user.service';
+import { UserService } from '@fullstack/data';
 
 @Module({
   imports: [
