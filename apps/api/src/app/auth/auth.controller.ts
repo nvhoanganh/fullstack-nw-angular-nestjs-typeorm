@@ -1,7 +1,6 @@
 import { Controller, Get, Body, Post } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
-import { JwtTokenDto, LoginRequestDto, UserService } from '@fullstack/data';
-import { AuthService } from './auth.service';
+import { JwtTokenDto, LoginRequestDto, UserService, AuthService } from '@fullstack/data';
 
 @Controller('auth')
 export class AuthController {

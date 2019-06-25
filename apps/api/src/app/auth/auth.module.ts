@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
-import { AuthService } from './auth.service';
 import { UserModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
+import { AuthService } from '@fullstack/data';
 
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
@@ -13,7 +13,7 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
     UserModule,
     passportModule,
     JwtModule.register({
-      secretOrPrivateKey: 'abcd1234',
+      secret: 'abcde',
       signOptions: {
         expiresIn: 3600
       }

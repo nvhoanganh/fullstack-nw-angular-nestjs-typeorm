@@ -5,12 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TicketModule } from './ticket/ticket.module';
 import { HealthCheckModule } from './healthz/healthz.module';
 import { getMetadataArgsStorage } from 'typeorm';
-
-//jwt
-import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -24,15 +20,10 @@ import { PassportModule } from '@nestjs/passport';
       entities: getMetadataArgsStorage().tables.map(tbl => tbl.target),
       synchronize: true
     }),
-
-    // controllers
     UserModule,
     HealthCheckModule,
     TicketModule,
-    AuthModule,
-    PassportModule
-  ],
-  controllers: [],
-  providers: []
+    AuthModule
+  ]
 })
 export class AppModule {}
