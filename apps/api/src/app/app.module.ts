@@ -8,6 +8,9 @@ import { getMetadataArgsStorage } from 'typeorm';
 
 //jwt
 import { JwtModule } from '@nestjs/jwt';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -21,11 +24,13 @@ import { JwtModule } from '@nestjs/jwt';
       entities: getMetadataArgsStorage().tables.map(tbl => tbl.target),
       synchronize: true
     }),
-    TicketModule,
+
+    // controllers
+    UserModule,
     HealthCheckModule,
-    JwtModule.register({
-      secretOrPrivateKey: 'key12345'
-    })
+    TicketModule,
+    AuthModule,
+    PassportModule
   ],
   controllers: [],
   providers: []

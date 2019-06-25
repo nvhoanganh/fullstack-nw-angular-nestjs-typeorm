@@ -7,6 +7,6 @@
     ]
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts", "src/app/auth/auth.service.ts"
   ]
 }
