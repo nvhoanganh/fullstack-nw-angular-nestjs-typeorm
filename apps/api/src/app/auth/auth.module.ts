@@ -4,7 +4,8 @@ import { JwtStrategy } from './jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { UserModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
-import { AuthService } from '@fullstack/data';
+import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
@@ -13,7 +14,7 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
     UserModule,
     passportModule,
     JwtModule.register({
-      secret: 'abcde',
+      secret: environment.jwtSecret,
       signOptions: {
         expiresIn: 3600
       }

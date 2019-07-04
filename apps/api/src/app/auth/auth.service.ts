@@ -1,9 +1,8 @@
 import { JwtService } from '@nestjs/jwt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from '@fullstack/domain';
-import { UserService } from './user.service';
-import { JwtPayload } from './jwt-payload.interface';
-import { LoginRequestDto } from './dto';
+import { UserService } from '../user/user.service';
+import { LoginRequestDto, JwtPayload } from '@fullstack/data';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +11,7 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
   async signIn(login: LoginRequestDto): Promise<string> {
-    const usr = await this.usersService.findOne(login.username);
+    const usr = await this.usersService.findOneByEmail(login.username);
     if (usr && usr.hashedPassword === login.password) {
       const user: JwtPayload = {
         email: usr.email,
@@ -26,6 +25,6 @@ export class AuthService {
   }
 
   async validateUser(payload: JwtPayload): Promise<User> {
-    return await this.usersService.findOne(payload.email);
+    return await this.usersService.findOneByEmail(payload.email);
   }
 }
