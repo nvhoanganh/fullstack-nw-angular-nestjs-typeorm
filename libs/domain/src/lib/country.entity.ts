@@ -1,5 +1,4 @@
 import { Column, Entity, OneToMany } from 'typeorm';
-import { Point } from 'geojson';
 import { Suburb } from './suburb.entity';
 import { BaseEntity } from './base.entity';
 import { ApiModelProperty } from '@nestjs/swagger';
@@ -18,6 +17,7 @@ export class Country extends BaseEntity {
   @Column('point', { nullable: true })
   location?: string;
 
+  @ApiModelProperty({ type: Suburb, isArray: true })
   @OneToMany(type => Suburb, suburb => suburb.country)
   suburbs: Suburb[];
 }

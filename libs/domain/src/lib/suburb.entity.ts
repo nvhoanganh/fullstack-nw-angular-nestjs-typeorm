@@ -3,6 +3,7 @@ import { Point } from 'geojson';
 import { BaseEntity } from './base.entity';
 import { Country } from './country.entity';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { User } from './user.entity';
 
 @Entity()
 export class Suburb extends BaseEntity {
@@ -18,6 +19,7 @@ export class Suburb extends BaseEntity {
   @Column('point', { nullable: true })
   location?: string;
 
+  @ApiModelProperty({ type: Country })
   @ManyToOne(type => Country, user => user.suburbs)
   country: Country;
 }
