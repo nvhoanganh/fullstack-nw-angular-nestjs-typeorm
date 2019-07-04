@@ -17,7 +17,6 @@
     "baseUrl": ".",
     "paths": {
       "@fullstack/data": ["libs/data/src/index.ts"],
-      "@fullstack/api-client": ["libs/api-client/src/index.ts"],
       "@fullstack/domain": ["libs/domain/src/index.ts"]
     }
   },

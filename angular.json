@@ -199,37 +199,6 @@
         }
       }
     },
-    "api-client": {
-      "projectType": "library",
-      "root": "libs/api-client",
-      "sourceRoot": "libs/api-client/src",
-      "prefix": "fullstack",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/api-client/tsconfig.lib.json",
-              "libs/api-client/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/api-client/jest.config.js",
-            "tsConfig": "libs/api-client/tsconfig.spec.json",
-            "setupFile": "libs/api-client/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
     "domain": {
       "root": "libs/domain",
       "sourceRoot": "libs\\domain\\src",
