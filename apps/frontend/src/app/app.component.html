@@ -1,4 +1,4 @@
-<h1>Tickets</h1>
+<h1>Countries</h1>
 <ul>
-  <li *ngFor="let t of (tickets$ | async)">{{ t.title }} - {{ t.type}}</li>
+  <li *ngFor="let t of (countries$ | async)">{{ t.name }} - {{ t.isoCode}}</li>
 </ul>

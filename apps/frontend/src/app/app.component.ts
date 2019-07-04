@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { TicketDto } from '@fullstack/data';
-import { GeneratedApiClient } from '@fullstack/api-client';
+import { Country, Suburb } from '@fullstack/domain';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'fullstack-root',
@@ -10,9 +10,10 @@ import { GeneratedApiClient } from '@fullstack/api-client';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  tickets$: Observable<TicketDto[]>;
+  countries$: Observable<Country[]>;
 
-  constructor(private apisrv : GeneratedApiClient) {
-    this.tickets$ = this.apisrv.ticketsAll();
+  constructor(private http: HttpClient) {
+
+    this.countries$ = this.http.get<Country[]>(`api/countries`);
   }
 }
