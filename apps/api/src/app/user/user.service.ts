@@ -1,4 +1,5 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '@fullstack/domain';
@@ -14,10 +15,6 @@ export class UserService extends CrudService {
   }
 
   async findOneByEmail(email: any): Promise<any> {
-    const obj = await this.ormRepo.findOne({ email: email});
-    if (obj) {
-      return obj;
-    }
-    throw new HttpException('NotFound', HttpStatus.NOT_FOUND);
+    return await this.ormRepo.findOne({ email: email });
   }
 }

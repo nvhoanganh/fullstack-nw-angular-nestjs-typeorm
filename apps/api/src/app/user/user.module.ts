@@ -10,7 +10,7 @@ import { UserService } from './user.service';
     TypeOrmModule.forFeature([User]),
     PassportModule.register({ defaultStrategy: 'jwt' })
   ],
-  providers: [UserService],
+  providers: [UserService, ],
   controllers: [UserController],
   exports: [UserService]
 })
