@@ -3,6 +3,7 @@ import { ApiResponse } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { UserService } from './user.service';
 import { User } from '@fullstack/domain';
+import { Roles } from '../core/role.guard';
 
 @Controller('users')
 export class UserController {
@@ -10,6 +11,7 @@ export class UserController {
 
   @ApiResponse({ status: 200, type: User, isArray: true })
   @Get()
+  @Roles('admin')
   @UseGuards(AuthGuard())
   getAll() {
     return this.UserSrv.findAll();

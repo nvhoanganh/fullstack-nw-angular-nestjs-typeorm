@@ -3,8 +3,8 @@ import { ApiModelProperty } from '@nestjs/swagger';
 import { BaseEntity } from './base.entity';
 
 export enum UserRole {
-  User = 0,
-  Admin = 1
+  User,
+  Admin
 }
 
 @Entity()
@@ -26,5 +26,5 @@ export class User extends BaseEntity {
 
   @ApiModelProperty()
   @Column('enum', { enum: UserRole })
-  userRole: number;
+  userRole: string;
 }

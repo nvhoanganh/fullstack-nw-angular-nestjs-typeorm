@@ -16,7 +16,8 @@ export class AuthService {
       const user: JwtPayload = {
         email: usr.email,
         firstName: usr.firstName,
-        lastName: usr.lastName
+        lastName: usr.lastName,
+        role: usr.userRole
       };
       return this.jwtService.sign(user);
     } else {
