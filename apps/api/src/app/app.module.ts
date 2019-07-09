@@ -36,7 +36,9 @@ import { UserRole, User } from '@fullstack/domain';
 })
 export class AppModule
   implements OnApplicationBootstrap, OnApplicationShutdown {
+
   constructor(private usrService: UserService) {}
+
   async onApplicationBootstrap() {
     console.log(`application started`);
 
@@ -48,6 +50,7 @@ export class AppModule
       await this.SeedData();
     }
   }
+
   async onApplicationShutdown(signal?: any) {
     console.log(`Application shutdown...`, signal);
   }
@@ -60,7 +63,5 @@ export class AppModule
       hashedPassword: 'admin',
       userRole: UserRole.Admin
     });
-
-
   }
 }

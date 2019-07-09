@@ -54,7 +54,7 @@ export function logger(req, res, next) {
     _parsedUrl: req._parsedUrl
   };
 
-  console.log(`Request:`, logreq);
+  // console.log(`Request:`, logreq);
 
 
   const cleanup = () => {
@@ -71,7 +71,7 @@ export function logger(req, res, next) {
       '@Id': reqToken,
       queryTime: endTime.valueOf() - startTime.valueOf()
     };
-    console.log('Response:', logres);
+    // console.log('Response:', logres);
   };
 
   const abortFn = () => {

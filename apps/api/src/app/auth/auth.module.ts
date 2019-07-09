@@ -6,19 +6,19 @@ import { UserModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
-
-const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
+import { CoreModule } from '../core/core.module';
 
 @Module({
   imports: [
     UserModule,
-    passportModule,
+    CoreModule,
     JwtModule.register({
       secret: environment.jwtSecret,
       signOptions: {
         expiresIn: 3600
       }
-    })
+    }),
+    PassportModule.register({ defaultStrategy: 'jwt' })
   ],
   providers: [AuthService, JwtStrategy],
   exports: [AuthModule],

@@ -4,13 +4,14 @@ import { User } from '@fullstack/domain';
 import { UserController } from './user.controller';
 import { PassportModule } from '@nestjs/passport';
 import { UserService } from './user.service';
+import { AuthService } from '../auth/auth.service';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
     PassportModule.register({ defaultStrategy: 'jwt' })
   ],
-  providers: [UserService, ],
+  providers: [UserService],
   controllers: [UserController],
   exports: [UserService]
 })

@@ -2,6 +2,7 @@ import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Reflector } from '@nestjs/core';
 import { SetMetadata } from '@nestjs/common';
+import { UserRole } from '@fullstack/domain';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -17,10 +18,11 @@ export class RolesGuard implements CanActivate {
     }
     const request = context.switchToHttp().getRequest();
     const user = request.user;
-    const hasRole = () => requireRole.indexOf(user.role) >= 0;
-    return user && user.roles && hasRole();
+    // console.log(`logged in user, required role is ${requireRole}`, user.userRole);
+    const hasRole = () => requireRole.toString() === user.userRole.toString();
+    return user && user.userRole && hasRole();
   }
 }
 
 
-export const Roles = (...roles: string[]) => SetMetadata('role', roles);
+export const Roles = (...roles: string[] | number[]) => SetMetadata('role', roles);

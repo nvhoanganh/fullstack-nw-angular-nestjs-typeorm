@@ -26,5 +26,5 @@ export class User extends BaseEntity {
 
   @ApiModelProperty()
   @Column('enum', { enum: UserRole })
-  userRole: string;
+  userRole: number;
 }
