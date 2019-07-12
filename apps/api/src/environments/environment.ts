@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   jwtSecret: 'abcde',
   db: {
-    host: 'localhost',w
+    host: 'localhost',
     port: 5432,
     username: 'postgres',
     password: 'admin',
