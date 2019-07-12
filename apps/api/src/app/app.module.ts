@@ -13,16 +13,17 @@ import { SuburbModule } from './suburb/suburb.module';
 import { UserService } from './user/user.service';
 import { CoreModule } from './core/core.module';
 import { UserRole, User } from '@fullstack/domain';
+import { environment } from '../environments/environment';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'admin',
-      database: 'fullstack',
+      host: environment.db.host,
+      port: environment.db.port,
+      username: environment.db.username,
+      password: environment.db.password,
+      database: environment.db.database,
       entities: getMetadataArgsStorage().tables.map(tbl => tbl.target),
       synchronize: true
     }),

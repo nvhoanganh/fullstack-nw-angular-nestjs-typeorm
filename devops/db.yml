@@ -12,32 +12,43 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 1433
-    targetPort: 1433
+  - port: 5432
+    targetPort: 5432
     protocol: TCP
   selector:
     app: realebot
     tier: database
 
+#################################
+#        PERSISTENT VOLUME
+#################################
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: managed-premium
+  resources:
+    requests:
+      storage: 30Gi
 
 #################################
 #        DATABASE WORKLOAD
 #################################
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: db-deploy
+  name: postgresql
   labels:
     app: realebot
     tier: database
 spec:
-  selector:
-    matchLabels:
-      app: realebot
-      tier: database
-  replicas: 1
-  minReadySeconds: 10
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -45,19 +56,24 @@ spec:
         tier: database
     spec:
       containers:
-      - name: worker
-        image: microsoft/mssql-server-linux
-        env:
-        - name: SA_PASSWORD
-          value: "Password1"
-        - name: ACCEPT_EULA
-          value: "Y"
-        - name: MSSQL_PID
-          value: "Express"
-        volumeMounts:
-        - mountPath: "/var/opt/mssql"
-          name: mssql-data
+        - image: postgres:11.4-alpine
+          name: postgresql
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_DB
+              value: fullstack
+            - name: POSTGRES_PASSWORD
+              value: admin
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432
+              name: postgresql
+          volumeMounts:
+            - name: postgresql
+              mountPath: /var/lib/postgresql/data
       volumes:
-        - name: mssql-data
+        - name: postgresql
           persistentVolumeClaim:
-            claimName: azure-managed-disk
+            claimName: postgres-data
