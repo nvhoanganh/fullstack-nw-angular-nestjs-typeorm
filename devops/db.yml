@@ -1,0 +1,63 @@
+#################################
+#        DATABASE SERVICE
+#################################
+apiVersion: v1
+kind: Service
+metadata:
+  # this is the name we used in our Connection String
+  name: db
+  labels:
+    app: realebot
+    tier: database
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 1433
+    targetPort: 1433
+    protocol: TCP
+  selector:
+    app: realebot
+    tier: database
+
+
+#################################
+#        DATABASE WORKLOAD
+#################################
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deploy
+  labels:
+    app: realebot
+    tier: database
+spec:
+  selector:
+    matchLabels:
+      app: realebot
+      tier: database
+  replicas: 1
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: realebot
+        tier: database
+    spec:
+      containers:
+      - name: worker
+        image: microsoft/mssql-server-linux
+        env:
+        - name: SA_PASSWORD
+          value: "Password1"
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: MSSQL_PID
+          value: "Express"
+        volumeMounts:
+        - mountPath: "/var/opt/mssql"
+          name: mssql-data
+      volumes:
+        - name: mssql-data
+          persistentVolumeClaim:
+            claimName: azure-managed-disk
