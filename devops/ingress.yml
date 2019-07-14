@@ -9,6 +9,10 @@ spec:
     - host: 7d8a674b9fec4dbebde2.australiaeast.aksapp.io
       http:
         paths:
+          - path: /docs
+            backend:
+              serviceName: backend-service
+              servicePort: 80
           - path: /api
             backend:
               serviceName: backend-service

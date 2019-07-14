@@ -87,4 +87,7 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 To view AKS portal
 - az aks browse --resource-group realebot-staging --name realebo-staging
 
-- docker build --rm -f "Dockerfile" -t fullstack-ui:1 .
+- docker build --rm -f "Dockerfileui" -t nvhoanganh1909/fullstack-ui:1 .
+- docker build --rm -f "Dockerfileapi" -t nvhoanganh1909/fullstack:1 .
+- docker push nvhoanganh1909/fullstack-ui:2
+- docker push nvhoanganh1909/fullstack:2

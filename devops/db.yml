@@ -10,7 +10,7 @@ metadata:
     app: realebot
     tier: database
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
   - port: 5432
     targetPort: 5432

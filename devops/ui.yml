@@ -56,7 +56,7 @@ spec:
     spec:
       containers:
       - name: worker
-        image: nvhoanganh1909/fullstack-ui:1
+        image: nvhoanganh1909/fullstack-ui:2
         env:
         - name: NODE_ENV
           value: "production"
