@@ -1,8 +1,8 @@
-FROM node:10.13-alpine
-ENV NODE_ENV production
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY ["dist/apps/api/main.js", "./"]
-EXPOSE 3333
-CMD [ "node", "main.js" ]
+# Build runtime image
+FROM nginx:alpine
+COPY nginx.conf /etc/nginx/nginx.conf
+WORKDIR /usr/share/nginx/html
+COPY /dist/apps/frontend/ .
+
+# expose port 80
+EXPOSE 80

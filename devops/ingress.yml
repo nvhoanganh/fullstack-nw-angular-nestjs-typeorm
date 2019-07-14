@@ -15,5 +15,5 @@ spec:
               servicePort: 80
           - path: /
             backend:
-              serviceName: webui
+              serviceName: ui-service
               servicePort: 80

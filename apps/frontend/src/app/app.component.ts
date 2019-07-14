@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { Country, Suburb } from '@fullstack/domain';
+// import { Country, Suburb } from '@fullstack/domain';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -10,10 +10,10 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  countries$: Observable<Country[]>;
+  countries$: Observable<any[]>;
 
   constructor(private http: HttpClient) {
 
-    this.countries$ = this.http.get<Country[]>(`api/countries`);
+    this.countries$ = this.http.get<any[]>(`api/countries`);
   }
 }
