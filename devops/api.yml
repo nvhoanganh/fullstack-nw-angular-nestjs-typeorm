@@ -1,0 +1,63 @@
+
+#################################
+#        API GATEWAY SERVICE
+#################################
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: realebot
+    tier: backend
+    service: backend-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: realebot
+    tier: backend
+    service: backend-service
+
+#################################
+#        BACKEND WORKLOAD
+#################################
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-service-deploy
+  labels:
+    app: realebot
+    tier: backend
+    service: backend-service
+spec:
+  selector:
+    matchLabels:
+      app: realebot
+      tier: backend
+      service: backend-service
+      version: stable
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: realebot
+        tier: backend
+        service: backend-service
+        version: stable
+    spec:
+      containers:
+      - name: worker
+        image: nvhoanganh1909/fullstack:2
+        readinessProbe:
+          httpGet:
+            path: /api/healthz
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 10
+        env:
+        - name: PORT
+          value: "80"

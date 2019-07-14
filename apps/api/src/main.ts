@@ -6,8 +6,10 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
 
 async function bootstrap() {
+  console.log(`Realebot api starting. Database hostname is ${environment.db.host}`);
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
@@ -30,7 +32,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
   // end custom config
 
-  const port = process.env.port || 3333;
+  const port = process.env.PORT || 3333;
   await app.listen(port, () => {
     console.log('Listening at http://localhost:' + port + '/' + globalPrefix);
   });
