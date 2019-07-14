@@ -40,18 +40,18 @@ spec:
       tier: backend
       service: backend-service
       version: stable
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
-        app: realebot
+        app:  realebot
         tier: backend
         service: backend-service
         version: stable
     spec:
       containers:
       - name: worker
-        image: nvhoanganh1909/fullstack:2
+        image: nvhoanganh1909/fullstack:7
         readinessProbe:
           httpGet:
             path: /api/healthz
