@@ -20,3 +20,8 @@ steps:
     npm run build --prod api
     npm run build --prod frontend
   displayName: 'npm install and build'
+
+- script: |
+    docker build --rm -f "DockerfileUi" -t nvhoanganh1909/fullstack-ui:B$(Build.BuildId) .
+    docker build --rm -f "DockerfileApi" -t nvhoanganh1909/fullstack:B$(Build.BuildId) .
+  displayName: 'build docker images'
