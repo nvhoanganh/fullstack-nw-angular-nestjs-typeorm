@@ -1,8 +1,3 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - master
 
@@ -28,32 +23,50 @@ steps:
       echo "API app need rebuild!"
       echo '##vso[task.setvariable variable=rebuildapi]true'
     fi
-
   displayName: 'check which app need rebuild'
 
 - script: |
-    echo "Rebuild UI"
     npm run build frontend -- --prod
-  displayName: 'build affected apps'
+  displayName: 'build affected UI'
   condition: eq(variables.rebuildui, 'true')
 
-# - script: |
-#     docker build --rm -f "DockerfileUi" -t nvhoanganh1909/fullstack-ui:B$(Build.BuildId) .
-#     docker build --rm -f "DockerfileApi" -t nvhoanganh1909/fullstack:B$(Build.BuildId) .
-#   displayName: 'build docker images'
+- script: |
+    npm run build api -- --prod
+  displayName: 'build affected API'
+  condition: eq(variables.rebuildapi, 'true')
 
-# - script: |
-#     docker login -u nvhoanganh1909 -p $(dockerpwd)
-#     docker push nvhoanganh1909/fullstack-ui:B$(Build.BuildId)
-#     docker push nvhoanganh1909/fullstack:B$(Build.BuildId)
-#   displayName: 'push image to dockerhub'
+- script: |
+    docker build --rm -f "DockerfileUi" -t nvhoanganh1909/fullstack-ui:B$(Build.BuildId) .
+  displayName: 'build UI docker image'
+  condition: eq(variables.rebuildui, 'true')
 
-# - task: CopyFiles@2
-#   inputs:
-#     contents: 'dist/**'
-#     targetFolder: $(Build.ArtifactStagingDirectory)
+- script: |
+    docker build --rm -f "DockerfileApi" -t nvhoanganh1909/fullstack:B$(Build.BuildId) .
+  displayName: 'build API docker image'
+  condition: eq(variables.rebuildapi, 'true')
+
+- script: |
+    docker login -u nvhoanganh1909 -p $(dockerpwd)
+    docker push nvhoanganh1909/fullstack-ui:B$(Build.BuildId)
+  displayName: 'push API image to dockerhub'
+  condition: eq(variables.rebuildui, 'true')
+
+- script: |
+    docker login -u nvhoanganh1909 -p $(dockerpwd)
+    docker push nvhoanganh1909/fullstack:B$(Build.BuildId)
+  displayName: 'push API image to dockerhub'
+  condition: eq(variables.rebuildapi, 'true')
+
+- task: CopyFiles@2
+  inputs:
+    contents: 'dist/**'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+  displayName: 'Collect artifact'
+  condition: or(eq(variables.rebuildapi, 'true'), eq(variables.rebuildui, 'true'))
 
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)
     artifactName: MyBuildOutputs
+  displayName: 'Publish artifact'
+  condition: or(eq(variables.rebuildapi, 'true'), eq(variables.rebuildui, 'true'))

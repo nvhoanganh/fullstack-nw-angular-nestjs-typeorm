@@ -14,7 +14,7 @@ export class AppComponent {
   countries$: Observable<CountryDto[]>;
 
   constructor(private http: HttpClient) {
-    console.log(`Testing12`,);
+    console.log(`Test`,);
     this.countries$ = this.http.get<CountryDto[]>(`${environment.api_url}countries`);
   }
 }
