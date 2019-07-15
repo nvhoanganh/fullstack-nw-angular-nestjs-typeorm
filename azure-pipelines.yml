@@ -16,8 +16,9 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    echo running
+    npm install
     opt=$(npm run affected:apps -- --base=origin/master~1 --head=origin/master)
+
     if [[ $opt == *"frontend"* ]]; then
       echo "Front end app need rebuild!"
       echo '##vso[task.setvariable variable=rebuildui]true'
@@ -35,7 +36,6 @@ steps:
 - script: |
     echo Rebuild UI?: $REBUILDUI
     echo Rebuild API?: $REBUIDAPI
-    npm install
     npm run build api -- --prod
     npm run build frontend -- --prod
   displayName: 'npm install and build'
