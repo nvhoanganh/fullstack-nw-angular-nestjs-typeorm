@@ -17,8 +17,8 @@ steps:
 
 - script: |
     npm install
-    npm run build --prod api
-    npm run build --prod frontend
+    npm run build api -- --prod
+    npm run build frontend -- --prod
   displayName: 'npm install and build'
 
 - script: |
@@ -37,7 +37,7 @@ steps:
   inputs:
     contents: 'dist/**'
     targetFolder: $(Build.ArtifactStagingDirectory)
-    
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)
