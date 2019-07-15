@@ -32,3 +32,13 @@ steps:
     docker push nvhoanganh1909/fullstack-ui:B$(Build.BuildId)
     docker push nvhoanganh1909/fullstack:B$(Build.BuildId)
   displayName: 'push image to dockerhub'
+
+- task: CopyFiles@2
+  inputs:
+    contents: 'dist/**'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+    
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutputs
