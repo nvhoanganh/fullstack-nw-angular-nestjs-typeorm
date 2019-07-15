@@ -11,7 +11,6 @@ import { environment } from './environments/environment';
 async function bootstrap() {
   const port = process.env.PORT || 3333;
   console.log(`Realebot api starting. Database hostname is ${environment.db.host}`);
-  console.log(`environment variable`, process.env);
   console.log(`Listening now on port ${port}`);
 
   const app = await NestFactory.create(AppModule);
