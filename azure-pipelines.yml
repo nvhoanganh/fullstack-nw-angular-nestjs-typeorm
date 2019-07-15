@@ -48,7 +48,7 @@ steps:
 - script: |
     docker login -u nvhoanganh1909 -p $(dockerpwd)
     docker push nvhoanganh1909/fullstack-ui:B$(Build.BuildId)
-  displayName: 'push API image to dockerhub'
+  displayName: 'push UI image to dockerhub'
   condition: eq(variables.rebuildui, 'true')
 
 - script: |
@@ -61,12 +61,12 @@ steps:
   inputs:
     contents: 'dist/**'
     targetFolder: $(Build.ArtifactStagingDirectory)
-  displayName: 'Collect artifact'
+  displayName: 'Collect artifacts'
   condition: or(eq(variables.rebuildapi, 'true'), eq(variables.rebuildui, 'true'))
 
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)
     artifactName: MyBuildOutputs
-  displayName: 'Publish artifact'
+  displayName: 'Publish artifacts'
   condition: or(eq(variables.rebuildapi, 'true'), eq(variables.rebuildui, 'true'))
