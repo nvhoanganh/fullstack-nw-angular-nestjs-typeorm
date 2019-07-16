@@ -57,12 +57,26 @@ steps:
   displayName: 'push API image to dockerhub'
   condition: eq(variables.rebuildapi, 'true')
 
-- task: CopyFiles@2
+- task: ArchiveFiles@2
   inputs:
-    contents: 'dist/**'
-    targetFolder: $(Build.ArtifactStagingDirectory)
-  displayName: 'Collect artifacts'
-  condition: or(eq(variables.rebuildapi, 'true'), eq(variables.rebuildui, 'true'))
+    rootFolderOrFile: 'dist/apps/api'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/API.zip'
+    replaceExistingArchive: true
+  displayName: 'archive API dist files'  
+  condition: eq(variables.rebuildapi, 'true')  
+
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'dist/apps/frontend'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/FrontEnd.zip'
+    replaceExistingArchive: true
+  displayName: 'archive Ui dist files'  
+  condition: eq(variables.rebuildui, 'true')  
 
 - task: PublishBuildArtifacts@1
   inputs:
