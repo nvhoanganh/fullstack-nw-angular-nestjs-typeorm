@@ -14,6 +14,7 @@ spec:
   ports:
   - port: 5432
     targetPort: 5432
+    name: http
     protocol: TCP
   selector:
     app: realebot
@@ -46,6 +47,7 @@ metadata:
   labels:
     app: realebot
     tier: database
+    version: stable
 spec:
   strategy:
     type: Recreate

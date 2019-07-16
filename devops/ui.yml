@@ -15,6 +15,7 @@ spec:
   ports:
   - port: 80
     protocol: TCP
+    name: http
   selector:
     app: realebot
     tier: ui
@@ -33,12 +34,14 @@ metadata:
     app: realebot
     tier: ui
     service: ui-service
+    version: stable
 spec:
   selector:
     matchLabels:
       app: realebot
       tier: ui
       service: ui-service
+      version: stable
   replicas: 1
   minReadySeconds: 10
   strategy:
@@ -56,7 +59,7 @@ spec:
     spec:
       containers:
       - name: worker
-        image: nvhoanganh1909/fullstack-ui:2
+        image: nvhoanganh1909/fullstack-ui:B16
         env:
         - name: NODE_ENV
           value: "production"

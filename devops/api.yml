@@ -15,6 +15,7 @@ spec:
   type: NodePort
   ports:
   - port: 80
+    name: http
     protocol: TCP
   selector:
     app: realebot
@@ -33,6 +34,7 @@ metadata:
     app: realebot
     tier: backend
     service: backend-service
+    version: stable
 spec:
   selector:
     matchLabels:
@@ -51,7 +53,7 @@ spec:
     spec:
       containers:
       - name: worker
-        image: nvhoanganh1909/fullstack:8
+        image: nvhoanganh1909/fullstack:B17
         readinessProbe:
           httpGet:
             path: /api/healthz
